@@ -10,16 +10,19 @@ async function pageHandler(req, res) {
     if (pathname === '/') {
       // Set pageURL for default path
       pageHTML = await fs.readFile(`./index.html`);
+      res.writeHead(200, { 'Content-Type': 'text/html' });
       res.write(pageHTML);
       res.end();
     } else {
       pageHTML = await fs.readFile(`.${pathname}.html`);
+      res.writeHead(200, { 'Content-Type': 'text/html' });
       res.write(pageHTML);
       res.end();
     }
   } catch (err) {
     console.error('Failed to resolve page ' + err);
     const pageHTML = await fs.readFile('./404.html');
+    res.writeHead(404, { 'Content-Type': 'text/html' });
     res.write(pageHTML);
     res.end();
   }
