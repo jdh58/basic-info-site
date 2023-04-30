@@ -1,6 +1,8 @@
 const http = require('http');
 const fs = require('fs/promises');
 
+const PORT = process.env.PORT || 8080;
+
 async function pageHandler(req, res) {
   try {
     const pathname = req.url;
@@ -25,4 +27,6 @@ async function pageHandler(req, res) {
 
 const server = http.createServer(pageHandler);
 
-server.listen(8080);
+server.listen(PORT, () => {
+  console.log(`Server is now running at port ${PORT}`);
+});
